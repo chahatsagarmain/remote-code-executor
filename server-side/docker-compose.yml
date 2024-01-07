@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  nginx-reverse-proxy:
+    build: ./nginx-reverse-proxy
+    image: nginx-rp
+    container_name: nginx-reverse-proxy
+    ports:
+      - "8080:8080"
+
+  pythonexecutor:
+    build: ./python-code-executor/python_executor/
+    image: pyexec
+    container_name: pythonexecutor
+
+  cppexecutor:
+    build: ./cpp-code-executor-server/python_executor/
+    image: cppexec
+    container_name: cppexecutor
+
+  jsexecutor:
+    build: ./javascript-code-executor/
+    image: jsexec
+    container_name: jsexecutor
+
+  
