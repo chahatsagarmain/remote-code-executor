@@ -1,18 +1,18 @@
+# CodeRunner - Remote Code Executor
 
-# CodeRunner - Remote code executor 
+CodeRunner is a remote code executor similar to what is used by famous coding platforms. It takes the code and user input and sends the response or the output.
 
-CodeRunner is a remote code executor similar to what is used by famous coding platforms . It takes the code and the user input and sends the response or the output . 
+## Project Tech Stack
 
-## Porject Techstack
- The frontend uses React.js+Vite and material ui for the ui components . The backend of this project uses nginx as reverse proxy and serves the static files for frontend , There are different django servers that compile and run python , javascript and C++ respectively . 
+The frontend uses React.js + Vite and Material-UI for UI components. The backend of this project uses Nginx as a reverse proxy and serves the static files for the frontend. There are different Django servers that compile and run Python, JavaScript, and C++ respectively.
 
-## Clone the project 
+## Clone the Project
 
-Clone the project locally using the link :-
+Clone the project locally using the link:
+
 ```bash
-    https://github.com/chahatsagarmain/remote-code-executor.git
-    cd remote-code-executor
-
+git clone https://github.com/chahatsagarmain/remote-code-executor.git
+cd remote-code-executor
 ```
 
 To run the project locally 
