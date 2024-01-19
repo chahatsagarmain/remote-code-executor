@@ -36,8 +36,10 @@ class RunCode:
     def runPythonCode(self):
         
         try:
-            output = subprocess.run(["python3","api/python_runner/temp.py"] , capture_output=True)
-            
+
+            with open("api/python_runner/tempi.txt" , "r") as file:
+                output = subprocess.run(["python3","api/python_runner/temp.py"] , capture_output=True , stdin=file ,timeout=10)
+        
             if output.returncode == 0:
                 return output.stdout.decode()
                 

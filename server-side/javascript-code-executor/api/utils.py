@@ -36,7 +36,9 @@ class RunCode:
     def runJsCode(self):
         
         try:
-            output = subprocess.run(["node","./api/js_runner/temp.js"] , capture_output=True)
+
+            with open("./api/js_runner/tempi.txt" , "r") as file:
+                output = subprocess.run(["node","./api/js_runner/temp.js"] , capture_output=True , stdin=file)
             
             if output.returncode == 0:
                 return output.stdout.decode()
