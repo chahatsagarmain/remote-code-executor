@@ -8,6 +8,7 @@ function CodeEditor() {
     const { code, setCode, lang } = useContext(MyContext);
     
     const typeCode = (value , valueUpdate) => {
+        console.log(value);
         setCode(value);
     }
 

@@ -36,13 +36,14 @@ class RunCode:
     
     def runCppCode(self):
         try:
-            
-            compile_output = subprocess.run(args=['g++','-o','./api/cpp_runner/temp','./api/cpp_runner/temp.cpp'], capture_output=True)
+            compile_output = subprocess.run(args=['g++','-o','./api/cpp_runner/temp','./api/cpp_runner/temp.cpp'], capture_output=True , timeout=10)
             
             if compile_output.returncode != 0:
                 return compile_output
             
-            run_output = subprocess.run(args=['./api/cpp_runner/temp'], capture_output=True, text=True)
+            with open("api/cpp_runner/tempi.txt" , "r") as file:
+
+                run_output = subprocess.run(args=['./api/cpp_runner/temp'], capture_output=True, text=True ,stdin=file )
             
             return run_output.stdout
                 

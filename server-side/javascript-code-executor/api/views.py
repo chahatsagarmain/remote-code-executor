@@ -5,10 +5,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from .utils import RunCode
 import os
+from rest_framework.parsers import MultiPartParser , FormParser
 
 # Create your views here.
 class CodeExecutor(APIView):
     
+    parser_classes = [MultiPartParser , FormParser]
     def get(self , request , *args):
         
         return Response({"message" : "Send a post request with the python code"} , status=status.HTTP_200_OK)
@@ -18,13 +20,19 @@ class CodeExecutor(APIView):
         
         try:
             
-            data = request.body.decode('utf-8')
+            data = request.POST.get('code', None)
+            inp = request.POST.get('inp', None)
+            print(data)
+            print(inp)
                         
             if data is None :
                 return ValueError({"message" : "No code found"})
 
             with open("./api/js_runner/temp.js","w+",buffering=100) as temp:
-                temp.write(data);
+                temp.write(data)
+
+            with open("./api/js_runner/tempi.txt","w+",buffering=100) as temp:
+                temp.write(inp)
 
             runcode = RunCode()
             
