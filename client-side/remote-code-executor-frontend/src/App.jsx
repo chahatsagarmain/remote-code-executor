@@ -6,15 +6,21 @@ import { MyContext } from './context/Context';
 import { javascript } from '@codemirror/lang-javascript';
 import Output from './components/Output';
 
+
 function App() {
   const [code, setCode] = useState(
-  `function add(a, b) {\n  return a + b;\n}`);
+  {
+    "javascript" : `function add(a, b) {\n  return a + b;\n}`,
+    "python" : `def add(a, b) {\n  return a + b;\n}`,
+    "cpp" : `#include <iostream>\n using namespace std;\n int add(a, b) {\n  return a + b;\n}`
+  });
+
 
   const [lang,setLang] = useState(javascript);
 
   return (
     <Box sx={{backgroundColor : "#22222b" , height:"100%"}}>
-      <MyContext.Provider value={{code , setCode , lang , setLang}}>
+      <MyContext.Provider value={{code , setCode , lang , setLang }}>
         <Header />
         <CodeEditor />
         <Output />

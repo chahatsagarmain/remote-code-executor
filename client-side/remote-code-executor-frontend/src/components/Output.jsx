@@ -13,7 +13,7 @@ function Output() {
     try {
       const language = lang.language.name.toString();
       const data = new FormData();
-      data.append("code", code);
+      data.append("code", code[language]);
       data.append("inp", input);
 
       const options = {
