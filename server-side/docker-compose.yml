@@ -6,7 +6,7 @@ services:
     image: nginx-rp
     container_name: nginx-reverse-proxy
     ports:
-      - "8080:8080"
+      - "80:80"
 
   pythonexecutor:
     build: ./python-code-executor/python_executor/
