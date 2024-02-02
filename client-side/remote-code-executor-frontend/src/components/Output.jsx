@@ -26,15 +26,16 @@ function Output() {
       console.log(input);
       switch (language) {
         case "python":
-          response = await fetch("http://localhost:80/api/python/", options);
+          // localhost:80
+          response = await fetch("http://43.204.212.9/api/python/", options);
           break;
 
         case "javascript":
-          response = await fetch("http://localhost:80/api/js/", options);
+          response = await fetch("http://43.204.212.9/api/js/", options);
           break;
 
         case "cpp":
-          response = await fetch("http://localhost:80/api/cpp/", options);
+          response = await fetch("http://43.204.212.9/api/cpp/", options);
           break;
 
         default:
