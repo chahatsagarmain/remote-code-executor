@@ -14,4 +14,5 @@ COPY . .
 
 EXPOSE 8002
 
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8002"]
+# CMD ["python3", "manage.py", "runserver", "0.0.0.0:8002"]
+CMD ["gunicorn","--workers=3", "--bind", "0.0.0.0:8002", "python_executor.wsgi:application"]
