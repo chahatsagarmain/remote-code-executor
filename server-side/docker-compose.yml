@@ -23,4 +23,9 @@ services:
     image: jsexec
     container_name: jsexecutor
 
+  redis:
+    image: redis:7.2.4
+    ports:
+      - 6379:6379
+    
   
