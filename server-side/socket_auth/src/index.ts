@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import errorMiddleware from "./middlewares/errorMiddleware";
 import router from "./routes/router";
 // import { connectToDb } from "./db/connect";
+import cookieParser from "cookie-parser";
 
 dotenv.config({
     path: ".env",
@@ -32,6 +33,8 @@ io.of("/room").on("connection", (socket) => {
         socket.to(`${room}`).emit("update" , data);
     }); 
 });
+
+app.use(cookieParser())
 
 app.use(express.json())
 

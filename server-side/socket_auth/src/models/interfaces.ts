@@ -1,3 +1,5 @@
+import { Request } from "express";
+import { JwtPayload } from "jsonwebtoken";
 
 export class ApiError extends Error {
     statusCode : number;
@@ -12,6 +14,10 @@ export class ApiError extends Error {
     }
 }
 
+export type loginType = {
+    email : string
+    password: string
+}
 
 export type User = {
     id?: number
@@ -27,3 +33,9 @@ export type User = {
     id: number
     users: User[]
   }
+
+interface RequestWithUserI extends Request{
+    user? : JwtPayload | string;
+}
+
+export type RequestWithUser = RequestWithUserI
