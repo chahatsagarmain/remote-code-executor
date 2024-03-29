@@ -25,13 +25,18 @@ io.of("/room").on("connection", (socket) => {
         console.log("in join");
 
         console.log(`${socket.id} has joined ${room}`);
-        socket.join(`${room}`);
+        socket.join(room as string);
         socket.emit("joined", "user joined");
     });
 
     socket.on("code" , (data) => {
-        socket.to(`${room}`).emit("update" , data);
+        socket.to(room as string).emit("update" , data);
     }); 
+
+    socket.on("disconnect" , (data) => {
+        socket.leave(room as string);
+        socket.disconnect();
+    });
 });
 
 app.use(cookieParser())

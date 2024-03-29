@@ -29,10 +29,10 @@ export type User = {
     room?: Room[]
   }
   
-  export type Room = {
+export type Room = {
     id: number
-    users: User[]
-  }
+    users?: User[]
+}
 
 interface RequestWithUserI extends Request{
     user? : JwtPayload | string;

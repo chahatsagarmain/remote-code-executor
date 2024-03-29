@@ -1,5 +1,8 @@
 
 import bcrypt from "bcrypt";
+import jwt, { JwtPayload } from "jsonwebtoken";
+import { Request } from "express";
+import { ApiError } from "../models/interfaces";
 
 const saltRounds = 10;
 
@@ -17,3 +20,24 @@ export async function comparePassword(password : string , hashedPassword : strin
 }
 
 
+export function getUserIdJwt(req : Request) : string {
+
+    const token = req.cookies["jwt"];
+
+    if(!token) throw new ApiError(401 , "token missing");
+
+    const decoded : string | JwtPayload | null = jwt.decode(token);
+
+    if(!decoded) throw new ApiError(500 , "error wile decoding");
+
+    let userId : string ;
+
+    if(typeof decoded === 'string'){
+        userId = JSON.parse(decoded).id;
+    } 
+    else{
+        userId = decoded.id;
+    }
+
+    return userId;
+}

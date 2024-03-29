@@ -122,7 +122,7 @@ export async function login(req : Request , res : Response , next : NextFunction
 
         const token = jwt.sign({
             "id" : user.id,
-            "email" : "email",
+            "email" : user.email,
             "roleId" : 0
         }, process.env.JWT_SECRET || "secret", {
             "expiresIn" : 60 *  60 * 60
@@ -175,7 +175,7 @@ export async function register(req : Request , res : Response , next : NextFunct
 
         const token = jwt.sign({
             "id" : user.id,
-            "email" : "email",
+            "email" : user.email,
             "roleId" : 0
         }, process.env.JWT_SECRET || "secret", {
             "expiresIn" : 60 *  60 * 60
