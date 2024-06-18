@@ -2,37 +2,20 @@
 
 // let client :  RedisClientType | null;
 
-// import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
-// const prisma : PrismaClient = new PrismaClient();
+class Connect {
+    client : PrismaClient;
 
-// export async function connectToDb() : Promise<RedisClientType>{
-//     client = await createClient();
+    constructor(){
+        this.client = new PrismaClient();
+        console.log("Client initialised")
+    }
 
-//     try{
-//         await client.connect();
-//         console.log("connected");
-//     }
-//     catch(error : any){
-//         console.log(`Error occured while connecting ` , error);
-//     }
-//     return client;
+    getClient() : PrismaClient {
+        return this.client;
+    }
+}
 
-// }
+export const connectToDB = new Connect();
 
-// export function getClient() : RedisClientType{
-//     if(!client){
-//         throw new Error("Client connection error")
-//     }
-//     return client;
-// }
-
-// export async function connectToDb(){
-//     try{
-//         await 
-//     }
-//     catch(error : any){
-//         console.log(error);
-//         return null;
-//     }
-// }

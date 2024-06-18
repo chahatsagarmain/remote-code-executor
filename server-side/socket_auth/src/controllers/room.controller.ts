@@ -52,7 +52,7 @@ export async function generateRoom(req: Request, res: Response, next: NextFuncti
 
 export async function getRoom(req: Request, res: Response, next: NextFunction) {
 
-    const roomId: string | null = req.body.roomId;
+    const roomId : string = req.params.roomId;
 
     if (!roomId) return next(new ApiError(404, "no room Id specified"));
 
@@ -68,6 +68,20 @@ export async function getRoom(req: Request, res: Response, next: NextFunction) {
     return res.status(200).json({
         room: room
     });
+}
+
+export async function getRoomUtil(roomId : string) : Promise<Room | null> {
+    const room: Room | null = await prisma.room.findFirst({
+        where: {
+            id: parseInt(roomId)
+        }
+    });
+
+    if(!room){
+        return null;
+    }
+
+    return room;
 }
 
 export async function addToRoom(req: Request, res: Response, next: NextFunction) {
@@ -151,7 +165,7 @@ export async function leaveRoom(req : Request , res : Response , next : NextFunc
             include : {
                 users : true
             }
-        })
+        });
 
         return res.status(200).json({
             message : "You left the room",
@@ -161,4 +175,64 @@ export async function leaveRoom(req : Request , res : Response , next : NextFunc
     catch(error : any){
         return next(new ApiError(error.statusCode , error.message));
     }
+}
+
+export async function leaveRoomById(userId : string,roomId : string) : Promise<boolean> { 
+    try{
+        const updatedRoom : Room = await prisma.room.update({
+            where : {
+                id : parseInt(roomId)
+            },
+            data : {
+                users : {
+                    disconnect : [{ id : parseInt(userId)}]
+                }
+            },
+            include : {
+                users : true
+            }
+        });
+    }
+    catch(error){
+        return false;
+    }
+
+    return false;
+};
+
+export async function addToRoomById(userId : string , roomId : string) : Promise<boolean> {
+    try{
+        console.log(roomId);
+        console.log(userId)
+        const room: Room | null = await prisma.room.findFirst({
+            where: {
+                id: parseInt(roomId)
+            }
+        });
+        console.log(room)
+        if(!room) return false;
+        
+
+        const updatedRoom : Room = await prisma.room.update({
+            where: {
+                id: parseInt(roomId)
+            },
+            data: {
+                users: {
+                    connect: [{ id: parseInt(userId) }]
+                }
+            },
+            include: {
+                users: true
+            }
+
+        });
+        console.log(updatedRoom)
+    }
+    catch(error){
+        console.log(error);
+        return false;
+    }
+
+    return true;
 }

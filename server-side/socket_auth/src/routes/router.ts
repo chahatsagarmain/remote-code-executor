@@ -7,9 +7,10 @@ import { addToRoom, generateRoom, getRoom, leaveRoom } from "../controllers/room
 const router: Router = Router();
 
 router.route("/room").post(authenticationMiddleware,generateRoom)
-                     .get(authenticationMiddleware , getRoom)
                      .put(authenticationMiddleware , addToRoom)
                      .delete(authenticationMiddleware , leaveRoom);
+
+router.route("/room/:roomId").get(authenticationMiddleware , getRoom);
 
 router.route("/user").get(getUser).post(createUser);
 router.route("/login").post(login);

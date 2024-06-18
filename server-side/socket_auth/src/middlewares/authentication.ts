@@ -4,7 +4,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 export async function authenticationMiddleware(req : RequestWithUser , res : Response , next : NextFunction){
     try{
-        const token = req.cookies["jwt"];
+        const token = req.cookies['jwt'];
 
     if(!token){
         return res.status(401).json({ message: 'Unauthorized: No token provided' });
